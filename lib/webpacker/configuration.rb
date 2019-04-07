@@ -6,6 +6,11 @@ class Webpacker::Configuration
   attr_reader :root_path, :config_path, :env
 
   def initialize(root_path:, config_path:, env:)
+    if env.include?("development")
+      env = 'development'
+    elsif env.include?("staging") || env.include?("production")
+      env = 'production'
+    end
     @root_path = root_path
     @config_path = config_path
     @env = env
